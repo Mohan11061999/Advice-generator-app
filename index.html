@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Advice generator app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      font-family: Manrope;
+    }
+
+    body {
+      background-color: hsl(218, 23%, 16%);
+      color: hsl(193, 38%, 86%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box-container {
+      background-color: hsl(217, 19%, 24%);
+      width: 500px;
+      border-radius: 5px;
+      margin-top: 40vh;
+
+    }
+
+    h4 {
+      color: hsl(150, 100%, 66%);
+      font-size: small;
+      text-align: center;
+      margin: 25px;
+      margin-top: 40px;
+
+
+    }
+
+    p {
+      font-size: larger;
+      text-align: center;
+      padding-left: 40px;
+      padding-right: 40px;
+      margin-top: 40px;
+
+    }
+
+
+    .divider {
+      display: flex;
+      justify-content: center;
+      margin-top: 45px;
+      margin-bottom: -15px;
+    }
+
+    .divider-img {
+      content: url("./images/pattern-divider-desktop.svg");
+
+      @media screen and (max-width: 375px) {
+        content: url("./images/pattern-divider-mobile.svg");
+      }
+    }
+
+    .dice {
+      display: flex;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    button {
+      border-radius: 50%;
+      background-color: hsl(150, 100%, 66%);
+      border: #fff;
+      position: relative;
+      top: 2.5rem;
+
+      &:hover {
+        box-shadow: 0 5px 15px hsl(150, 100%, 66%);
+      }
+    }
+
+    .dice-button {
+      padding: 7px;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <main class="box-container">
+
+    <h4>ADVICE #<span class="id"></span></h4>
+    <p><q class="advice"></q></p>
+    <div class="divider"> <img class="divider-img" alt="divider"></div>
+    <div class="dice"><button onclick="window.location.reload()"><img class="dice-button"
+          src="./images/icon-dice.svg" /></button></div>
+
+  </main>
+  <script>
+    const adviceId = document.getElementsByClassName('id')[0];
+    const advice = document.getElementsByClassName('advice')[0];
+
+    fetch('https://api.adviceslip.com/advice')
+      .then((response) => response.json())
+      .then((data) => {
+        adviceId.innerHTML = data.slip.id;
+        advice.innerHTML = data.slip.advice;
+      })
+
+  </script>
+
+</body>
+</html>
